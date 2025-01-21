@@ -1,6 +1,6 @@
 variable "ami" {
   type    = string
-  default = "ami-0f83b0cfd2cdc19a9"
+  default = "ami-091f18e98bc129c4e"
 
 }
 
@@ -11,6 +11,6 @@ variable "instance_type" {
 }
 variable "region" {
   type    = string
-  default = "us-east-2"
+  default = "eu-west-2"
 
 }

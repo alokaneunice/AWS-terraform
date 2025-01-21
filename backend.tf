@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "caro-23345554656787"
+    bucket = "terraform764210975"
     key    = "nginx-backend/terraform.tfstate"
-    region = "us-east-2"
+    region = "eu-west-2"
   }
 }
