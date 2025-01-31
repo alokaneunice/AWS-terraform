@@ -1,6 +1,6 @@
 terraform init  (to initailize terraform backend)
 
-terraform fmt (formarts the file to a standard format)
+terraform fmt (formats the file to a standard format)
 
 terraform validate (checks if th HCL code is valid)
 

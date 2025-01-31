@@ -1,11 +1,36 @@
 ## DEPLOY INFRASTRUCTURE TERRAFORM
 
-This project entails the provisioning of an Ec2 instance and immdiately the instance is lunched then nginx webserver 
+This project entails the provisioning of an Ec2 instance and immdiately the instance is launched then nginx webserver 
 should be installed with the script called nginx-server in the root folder but ofcourse the necceesary security settings and firewall will be installed as well
+
+### Project prerequisite
+i.Ensure Terraform is installed 
+terraform --version
+Terraform v1.10.3
+ii. Ensure you have AWS CLI so that you can interact with AWS infrastructure 
+ aws --version
+aws-cli/2.22.19 Python/3.12.6 Windows/10 exe/AMD64
+iii. ensure you are authenticated within AWS
+aws s3 ls
+2025-01-09 21:46:20 terraform764210975
+iv. If not authenticated,create AWS IAM user (with administrative access)
+v.The user created must be given a secret_key and an access_key
+vi. To authenticate with AWS Infrastructure,
+aws configure
+AWS Access Key ID [****************BM4R]: 
+AWS Secret Access Key [****************5n/H]: 
+Default region name [eu-west-2]: 
+Default output format [json]: 
+
+vii. Run the command below to confirm  authentication with aws
+aws s3 ls
+
+aws sts get-caller-identity
+
 
 
 ### Projects Requirements
-First download and install the terraform using this link As a first step, install terraform (see: https://www.terraform.io/downloads)) and select your machine version if its windows and if its mac you can select accordingly and install the requirements:
+First download and install the terraform using this link As a first step, install terraform (see: https://www.terraform.io/downloads) and select your machine version if its windows and if its mac you can select accordingly and install the requirements:
 
 To check if terraform was installed
 $ terraform --version
@@ -17,7 +42,6 @@ https://awscli.amazonaws.com/AWSCLIV2.msi
 Terraform Access Provisioing and Docker requirements for this project:
 I created the ec2.tf file and insert the following code snippeets below
 In the code we see where the ec2 instance was created with all its componensts with region and neccessary security group ids
-
 
 provider "aws" {
   
@@ -33,14 +57,9 @@ resource "aws_instance" "nginx-server" {
   user_data = file("nginx-install.sh")
 
   
-
-  
-  
   tags = {
     Name = "nginx_server"
   }
-
-}
 
 Next i created the security group woith its inress and egress rules as seen below
 
@@ -114,3 +133,24 @@ variable "region" {
   default = "eu-west-2"
 
 }# deploy-infrastructure-terraform
+
+### Process of running the project
+i. To initialise the terraform backend, run the command below
+
+terraform init
+ii. To format the terraform script
+terraform fmt
+iii. To validate code,
+terraform validate
+iv. To show all the resources to be created by terraform
+
+terraform plan
+v. To create or provision the resources in aws without prompt for approval
+
+terraform apply --auto-approve
+
+vi.To destroy the resources created in aws without prompt for approval
+
+terraform destroy --auto-approve
+
+vii.Check physically in aws, all the resources have been removed
